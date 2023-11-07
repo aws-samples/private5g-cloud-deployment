@@ -1,0 +1,18 @@
+{
+  "Comment": "Update the A record set",
+  "Changes": [
+    {
+      "Action": "UPSERT",
+      "ResourceRecordSet": {
+        "Name": "upf.open5gs.service",
+        "Type": "A",
+        "TTL": 30,
+        "ResourceRecords": [
+          {
+            "Value": "10.1.30.210"
+          }
+        ]
+      }
+    }
+  ]
+}

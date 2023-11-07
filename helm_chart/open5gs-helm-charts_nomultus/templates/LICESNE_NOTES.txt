@@ -1,0 +1,3 @@
+# This contains the original code for 5gcore-sctp-loadbalancer.
+# Licensed under the Apache License, Version 2.0.
+# You can find the original code at https://github.com/infinitydon/5gcore-sctp-loadbalancer/tree/main/open5gs-helm-charts/templates

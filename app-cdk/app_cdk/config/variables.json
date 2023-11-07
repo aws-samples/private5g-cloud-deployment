@@ -1,0 +1,12 @@
+{
+    "KEY_NAME": "private5g-west-2",
+    "AZS" : ["us-west-2a", "us-west-2b"],
+    "VPC_CIDR" : "10.1.0.0/16",
+    "PUBLIC_SUBNET_AZ1_CIDR" : "10.1.10.0/24",
+    "PUBLIC_SUBNET_AZ2_CIDR" : "10.1.20.0/24",
+    "PRIVATE_SUBNET_AZ1_CIDR" : "10.1.30.0/24",
+    "PRIVATE_SUBNET_AZ2_CIDR" : "10.1.40.0/24",
+
+    "CUSTOMER_VPC_CIDR": "192.168.0.0/16"
+    
+}

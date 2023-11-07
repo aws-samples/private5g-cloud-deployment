@@ -1,0 +1,18 @@
+{
+    "Comment": "Update the A record set",
+    "Changes": [
+      {
+        "Action": "UPSERT",
+        "ResourceRecordSet": {
+          "Name": "DOMAIN",
+          "Type": "A",
+          "TTL": 30,
+          "ResourceRecords": [
+            {
+              "Value": "IP_ADDR"
+            }
+          ]
+        }
+      }
+    ]
+  }

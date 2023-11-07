@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-udm-config
+  labels:
+    epc-mode: udm
+data:
+  udm.yaml: |
+    logger:
+        file: /var/log/udm.log
+    sbi:
+        server:
+          no_tls: true
+        client:
+          no_tls: true
+    udm:
+      sbi:   
+      - addr: 0.0.0.0
+        advertise: {{ .Release.Name }}-udm
+    nrf:
+     sbi:
+      name: {{ .Release.Name }}-nrf

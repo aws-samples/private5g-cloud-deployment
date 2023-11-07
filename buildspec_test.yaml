@@ -1,0 +1,23 @@
+version: 0.2
+
+phases:
+  install: # Install AWS cli, kubectl (needed for Helm) and Helm
+    commands:
+       - apt update
+       
+  pre_build: # Add kubeconfig to access to EKS cluster
+    commands:
+      - echo Logging in to Amazon ECR...
+      - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $IMAGE_REPO_URI
+
+  build:
+    commands:
+      - cd ./my_open5gs
+      - echo Build started on `date`
+      - echo Building the Docker image...
+      - docker build -t my_open5gs_image:$IMAGE_TAG .
+      - docker tag my_open5gs_image:$IMAGE_TAG $IMAGE_REPO_URI:$IMAGE_TAG            
+      - echo Pushing the Docker image...
+      - docker push $IMAGE_REPO_URI:$IMAGE_TAG
+      - echo Writing image definitions file..
+      - printf '[{"name":"my_open5gs_image","imageUri":"%s"}]' $IMAGE_REPO_URI:$IMAGE_TAG > $CODEBUILD_SRC_DIR/imagedefinitions.json

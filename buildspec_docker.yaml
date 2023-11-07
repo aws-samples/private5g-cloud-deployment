@@ -1,0 +1,25 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+       - apt update
+       - apt install -y awscli git python3
+       - curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+       - chmod +x kubectl
+       - mv ./kubectl /usr/local/bin/kubectl
+       - curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+       - chmod 700 get_helm.sh
+       - ./get_helm.sh
+
+  pre_build:
+    commands:
+      - aws sts get-caller-identity
+      - mkdir ~/.kube
+      - aws eks --region $AWS_DEFAULT_REGION update-kubeconfig --name $CLUSTER_NAME
+      - kubectl get svc
+
+  build:
+    commands:
+      - cd ./helm_chart
+      - helm -n open5gs upgrade --install core5g open5gs-helm-charts_nomultus/
